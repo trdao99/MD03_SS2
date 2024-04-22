@@ -398,3 +398,20 @@ SELECT SUM(CASE WHEN nhanvien.GioiTinh = 'Nam' THEN 1 ELSE 0 END) AS SoLuongNam,
        SUM(CASE WHEN nhanvien.GioiTinh = 'Nữ' THEN 1 ELSE 0 END) AS SoLuongNu
 FROM nhanvien;
 
+#25:
+SELECT Hoten
+FROM nhanvien
+WHERE
+    (GioiTinh = 'Nam' AND DATEDIFF(CURRENT_DATE(), NgaySinh) >= 60 * 365) OR
+    (GioiTinh = 'Nữ' AND DATEDIFF(CURRENT_DATE(), NgaySinh) >= 55 * 365);
+#26:
+SELECT HoTen,
+    YEAR(NgaySinh) + CASE WHEN GioiTinh = 'Nam' THEN 60 ELSE 55 END AS NamVeHuu
+FROM nhanvien;
+#32:
+SELECT ` loaisp`.TenLoaiSP, count(` sanpham`.MaloaiSP) AS TongSoLuong
+FROM ` loaisp`
+         JOIN ` sanpham` ON ` sanpham`.MaLoaiSp = ` loaisp`.MaloaiSP
+GROUP BY ` loaisp`.TenLoaiSP;
+
+select * from ` sanpham`
